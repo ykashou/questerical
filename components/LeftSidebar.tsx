@@ -15,6 +15,7 @@ import {
   X
 } from 'lucide-react-native';
 import useThemeStore from '@/store/themeStore';
+import useNotificationStore from '@/store/notificationStore';
 import Animated, { 
   useAnimatedStyle, 
   withSpring, 
@@ -44,6 +45,7 @@ type FeatureTab = {
   label: string;
   path?: string;
   onPress?: () => void;
+  badge?: number;
 };
 
 interface LeftSidebarProps {
@@ -55,6 +57,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { colors, theme } = useThemeStore();
+  const { unreadCount } = useNotificationStore();
   
   // Animation values
   const sidebarWidth = useSharedValue(isOpen ? EXPANDED_WIDTH : COLLAPSED_WIDTH);
@@ -108,6 +111,13 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
 
   const featureTabs: FeatureTab[] = [
     { 
+      name: 'notifications', 
+      icon: <Bell size={24} color={pathname === '/notifications' ? colors.primary : colors.text} />,
+      label: 'Notifications',
+      path: '/notifications',
+      badge: unreadCount,
+    },
+    { 
       name: 'stats', 
       icon: <BarChart size={24} color={colors.text} />,
       label: 'Stats',
@@ -116,11 +126,6 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
       name: 'shared', 
       icon: <Users size={24} color={colors.text} />,
       label: 'Shared Quests',
-    },
-    { 
-      name: 'notifications', 
-      icon: <Bell size={24} color={colors.text} />,
-      label: 'Notifications',
     },
     { 
       name: 'search', 
@@ -213,21 +218,34 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
         
         <View style={[styles.divider, { backgroundColor: colors.border }]} />
         
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Coming Soon</Text>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Features</Text>
         
         <View style={styles.featureTabsContainer}>
           {featureTabs.map((tab) => (
             <TouchableOpacity
               key={tab.name}
-              style={styles.tab}
-              onPress={tab.onPress || (() => {})}
+              style={[
+                styles.tab,
+                tab.path && pathname === tab.path && { backgroundColor: colors.card }
+              ]}
+              onPress={tab.path ? () => handleNavigation(tab.path) : (tab.onPress || (() => {}))}
             >
               <View style={styles.iconContainer}>
                 {tab.icon}
               </View>
-              <Text style={[styles.tabLabel, { color: colors.text }]}>
+              <Text style={[
+                styles.tabLabel, 
+                { color: tab.path && pathname === tab.path ? colors.primary : colors.text }
+              ]}>
                 {tab.label}
               </Text>
+              {tab.badge && tab.badge > 0 && (
+                <View style={[styles.badge, { backgroundColor: colors.danger }]}>
+                  <Text style={[styles.badgeText, { color: colors.text }]}>
+                    {tab.badge > 99 ? '99+' : tab.badge}
+                  </Text>
+                </View>
+              )}
             </TouchableOpacity>
           ))}
         </View>
@@ -294,6 +312,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     marginLeft: 12,
+    flex: 1,
+  },
+  badge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 10,
+    minWidth: 20,
+    alignItems: 'center',
+  },
+  badgeText: {
+    fontSize: 12,
+    fontWeight: '600',
   },
   divider: {
     height: 1,

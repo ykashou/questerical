@@ -102,16 +102,35 @@ const useQuestStore = create<QuestStore>()(
           isRecurring: quest.isRecurring || false,
           isTemplate: false,
         };
+        
+        // Trigger notification generation
+        setTimeout(() => {
+          const notificationStore = require('@/store/notificationStore').default;
+          if (notificationStore.getState) {
+            notificationStore.getState().generateQuestNotifications();
+          }
+        }, 100);
+        
         return { quests: [...state.quests, newQuest] };
       }),
       
-      updateQuest: (id, updates) => set((state) => ({
-        quests: state.quests.map((quest) => 
+      updateQuest: (id, updates) => set((state) => {
+        const updatedQuests = state.quests.map((quest) => 
           quest.id === id 
             ? { ...quest, ...updates, updatedAt: Date.now() } 
             : quest
-        ),
-      })),
+        );
+        
+        // Trigger notification generation
+        setTimeout(() => {
+          const notificationStore = require('@/store/notificationStore').default;
+          if (notificationStore.getState) {
+            notificationStore.getState().generateQuestNotifications();
+          }
+        }, 100);
+        
+        return { quests: updatedQuests };
+      }),
       
       deleteQuest: (id) => set((state) => ({
         quests: state.quests.filter((quest) => quest.id !== id),
@@ -167,6 +186,20 @@ const useQuestStore = create<QuestStore>()(
           newStats.totalQuestsCompleted += 1;
           newStats.totalXP += quest.xpReward;
           newStats.level = Math.floor(newStats.totalXP / 1000) + 1;
+          
+          // Generate completion notification
+          setTimeout(() => {
+            const notificationStore = require('@/store/notificationStore').default;
+            if (notificationStore.getState) {
+              notificationStore.getState().addNotification({
+                type: 'completion',
+                priority: 'medium',
+                title: 'Quest Completed!',
+                message: `Congratulations! You completed "${quest.title}" and earned ${quest.xpReward} XP.`,
+                questId: quest.id,
+              });
+            }
+          }, 100);
         } else {
           newStats.totalQuestsCompleted = Math.max(0, newStats.totalQuestsCompleted - 1);
           newStats.totalXP = Math.max(0, newStats.totalXP - quest.xpReward);
@@ -478,6 +511,20 @@ const useQuestStore = create<QuestStore>()(
       unlockAchievement: (achievementId) => set((state) => {
         const achievement = state.userStats.achievements.find(a => a.id === achievementId);
         if (!achievement || achievement.unlockedAt) return state;
+        
+        // Generate achievement notification
+        setTimeout(() => {
+          const notificationStore = require('@/store/notificationStore').default;
+          if (notificationStore.getState) {
+            notificationStore.getState().addNotification({
+              type: 'achievement',
+              priority: 'high',
+              title: 'Achievement Unlocked!',
+              message: `${achievement.icon} ${achievement.name}: ${achievement.description}`,
+              achievementId: achievement.id,
+            });
+          }
+        }, 100);
         
         return {
           userStats: {
