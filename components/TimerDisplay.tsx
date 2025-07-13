@@ -7,9 +7,10 @@ import useTimerStore from '@/store/timerStore';
 interface TimerDisplayProps {
   questId?: string;
   compact?: boolean;
+  horizontal?: boolean;
 }
 
-export default function TimerDisplay({ questId, compact = false }: TimerDisplayProps) {
+export default function TimerDisplay({ questId, compact = false, horizontal = false }: TimerDisplayProps) {
   const { colors } = useThemeStore();
   const { 
     currentSession,
@@ -79,6 +80,64 @@ export default function TimerDisplay({ questId, compact = false }: TimerDisplayP
   const progress = currentSession 
     ? Math.max(0, Math.min(1, 1 - (displayTime / (currentSession.duration * 60 * 1000))))
     : 0;
+  
+  // Horizontal compact timer bar for quest cards
+  if (horizontal) {
+    if (!currentSession || (currentSession.questId !== questId)) {
+      return null;
+    }
+    
+    return (
+      <View style={[styles.horizontalContainer, { backgroundColor: colors.border + '40' }]}>
+        <View style={styles.horizontalContent}>
+          <TouchableOpacity
+            style={styles.horizontalPlayButton}
+            onPress={handlePlayPause}
+            activeOpacity={0.7}
+          >
+            {timerState === 'running' ? (
+              <Pause size={12} color={colors.primary} />
+            ) : (
+              <Play size={12} color={colors.primary} />
+            )}
+          </TouchableOpacity>
+          
+          <View style={styles.horizontalTimerInfo}>
+            <Text style={[styles.horizontalTimeText, { color: colors.text }]}>
+              {formatTime(displayTime)}
+            </Text>
+            <Text style={[styles.horizontalModeText, { color: colors.textSecondary }]}>
+              {currentSession.mode} • {currentSession.duration}m
+            </Text>
+          </View>
+          
+          <View style={styles.horizontalProgressContainer}>
+            <View style={[styles.horizontalProgressBar, { backgroundColor: colors.border }]}>
+              <View 
+                style={[
+                  styles.horizontalProgressFill, 
+                  { 
+                    backgroundColor: timerState === 'running' ? colors.primary : colors.warning,
+                    width: `${progress * 100}%`
+                  }
+                ]} 
+              />
+            </View>
+          </View>
+          
+          {isActive && (
+            <TouchableOpacity
+              style={styles.horizontalStopButton}
+              onPress={handleStop}
+              activeOpacity={0.7}
+            >
+              <Square size={10} color={colors.textSecondary} />
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+    );
+  }
   
   return (
     <View style={[
@@ -229,6 +288,54 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // Horizontal timer bar styles
+  horizontalContainer: {
+    borderRadius: 8,
+    padding: 8,
+    marginTop: 8,
+  },
+  horizontalContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  horizontalPlayButton: {
+    width: 24,
+    height: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  horizontalTimerInfo: {
+    flex: 1,
+  },
+  horizontalTimeText: {
+    fontSize: 13,
+    fontWeight: '600',
+    fontFamily: 'monospace',
+  },
+  horizontalModeText: {
+    fontSize: 10,
+    textTransform: 'capitalize',
+  },
+  horizontalProgressContainer: {
+    flex: 2,
+    marginHorizontal: 8,
+  },
+  horizontalProgressBar: {
+    height: 3,
+    borderRadius: 1.5,
+    overflow: 'hidden',
+  },
+  horizontalProgressFill: {
+    height: '100%',
+    borderRadius: 1.5,
+  },
+  horizontalStopButton: {
+    width: 20,
+    height: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },

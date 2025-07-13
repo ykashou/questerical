@@ -21,6 +21,7 @@ import {
 import { Quest, PriorityType } from '@/types/quest';
 import useQuestStore from '@/store/questStore';
 import useThemeStore from '@/store/themeStore';
+import TimerDisplay from '@/components/TimerDisplay';
 
 interface QuestCardProps {
   quest: Quest;
@@ -300,6 +301,9 @@ export default function QuestCard({ quest, isSelected, onSelect, showTimeTrackin
             </View>
           )}
           
+          {/* Timer Bar */}
+          <TimerDisplay questId={quest.id} horizontal />
+          
           {/* Footer */}
           <View style={styles.footer}>
             <View style={styles.leftFooter}>
@@ -336,7 +340,7 @@ export default function QuestCard({ quest, isSelected, onSelect, showTimeTrackin
                 </View>
               )}
               
-              {/* Time Tracking */}
+              {/* Time Tracking - Only show if no active timer */}
               {showTimeTracking && (
                 <Pressable 
                   style={[styles.timeButton, hasActiveTimeEntry && { backgroundColor: colors.success + '20' }]}
