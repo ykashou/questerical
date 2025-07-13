@@ -229,7 +229,13 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
                 styles.tab,
                 tab.path && pathname === tab.path && { backgroundColor: colors.card }
               ]}
-              onPress={tab.path ? () => handleNavigation(tab.path) : (tab.onPress || (() => {}))}
+              onPress={() => {
+                if (tab.path) {
+                  handleNavigation(tab.path);
+                } else if (tab.onPress) {
+                  tab.onPress();
+                }
+              }}
             >
               <View style={styles.iconContainer}>
                 {tab.icon}
