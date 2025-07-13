@@ -374,7 +374,7 @@ export default function QuestCard({ quest, isSelected, onSelect, showTimeTrackin
 const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
-    marginBottom: 12,
+    marginBottom: 10,
     position: 'relative',
     overflow: 'hidden',
     borderRadius: 12,
@@ -416,7 +416,7 @@ const styles = StyleSheet.create({
   },
   container: {
     borderRadius: 12,
-    padding: 16,
+    padding: 14,
     borderLeftWidth: 4,
   },
   header: {
@@ -437,7 +437,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
     flex: 1,
   },
@@ -478,9 +478,9 @@ const styles = StyleSheet.create({
     minWidth: 35,
   },
   description: {
-    fontSize: 14,
-    marginBottom: 12,
-    lineHeight: 20,
+    fontSize: 13,
+    marginBottom: 10,
+    lineHeight: 18,
   },
   completedText: {
     textDecorationLine: 'line-through',
@@ -489,7 +489,7 @@ const styles = StyleSheet.create({
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 12,
+    marginBottom: 8,
     alignItems: 'center',
   },
   tag: {

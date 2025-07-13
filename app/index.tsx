@@ -15,7 +15,7 @@ import AdvancedFilters from '@/components/AdvancedFilters';
 import QuestAnalytics from '@/components/QuestAnalytics';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const CARD_HEIGHT = 140; // Updated for new card design
+const CARD_HEIGHT = 120; // Reduced height for better spacing
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -384,6 +384,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 16,
+    paddingTop: 16,
     paddingBottom: 20,
   },
   emptyContainer: {
