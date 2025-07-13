@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Moon, Sun, Trash2, Info } from 'lucide-react-native';
+import { Moon, Sun, Trash2, Info, TestTube, ArrowLeft } from 'lucide-react-native';
 import useThemeStore from '@/store/themeStore';
 import useQuestStore from '@/store/questStore';
 
@@ -40,10 +40,24 @@ type SettingSection = {
 
 export default function SettingsScreen() {
   const { colors, theme, toggleTheme } = useThemeStore();
-  const deleteQuest = useQuestStore((state) => state.deleteQuest);
-  const quests = useQuestStore((state) => state.quests);
+  const { 
+    deleteQuest, 
+    quests, 
+    isSandboxMode, 
+    enableSandboxMode, 
+    disableSandboxMode 
+  } = useQuestStore();
   
   const handleClearAllQuests = () => {
+    if (isSandboxMode) {
+      Alert.alert(
+        'Sandbox Mode Active',
+        'You cannot clear quests while in Sandbox Mode. Exit Sandbox Mode first to manage your real data.',
+        [{ text: 'OK', style: 'default' }]
+      );
+      return;
+    }
+    
     Alert.alert(
       'Clear All Quests',
       'Are you sure you want to delete all quests? This action cannot be undone.',
@@ -59,6 +73,36 @@ export default function SettingsScreen() {
       ]
     );
   };
+  
+  const handleToggleSandboxMode = () => {
+    if (isSandboxMode) {
+      Alert.alert(
+        'Exit Sandbox Mode',
+        'Are you sure you want to exit Sandbox Mode? All sandbox data will be lost and your original data will be restored.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Exit Sandbox', 
+            style: 'default',
+            onPress: disableSandboxMode
+          },
+        ]
+      );
+    } else {
+      Alert.alert(
+        'Enter Sandbox Mode',
+        'Sandbox Mode will temporarily replace your data with sample quests for testing and exploration. Your original data will be safely stored and restored when you exit.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Enter Sandbox', 
+            style: 'default',
+            onPress: enableSandboxMode
+          },
+        ]
+      );
+    }
+  };
 
   const settingsSections: SettingSection[] = [
     {
@@ -70,6 +114,21 @@ export default function SettingsScreen() {
           type: 'switch',
           value: theme === 'dark',
           onToggle: toggleTheme,
+        },
+      ],
+    },
+    {
+      title: 'Development',
+      items: [
+        {
+          icon: isSandboxMode 
+            ? <ArrowLeft size={22} color={colors.primary} /> 
+            : <TestTube size={22} color={colors.primary} />,
+          title: isSandboxMode ? 'Exit Sandbox Mode' : 'Enter Sandbox Mode',
+          type: 'button',
+          buttonText: isSandboxMode ? 'Exit' : 'Enter',
+          buttonColor: colors.primary,
+          onPress: handleToggleSandboxMode,
         },
       ],
     },
@@ -112,6 +171,14 @@ export default function SettingsScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      {isSandboxMode && (
+        <View style={[styles.sandboxBanner, { backgroundColor: colors.primary }]}>
+          <TestTube size={16} color={colors.background} />
+          <Text style={[styles.sandboxText, { color: colors.background }]}>
+            Sandbox Mode Active - Sample data is being used
+          </Text>
+        </View>
+      )}
       <ScrollView contentContainerStyle={styles.content}>
         {settingsSections.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.section}>
@@ -179,6 +246,18 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  sandboxBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    gap: 8,
+  },
+  sandboxText: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   content: {
     padding: 16,

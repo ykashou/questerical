@@ -68,6 +68,320 @@ const defaultUserStats: UserStats = {
   achievements: defaultAchievements,
 };
 
+// Sandbox mode sample data
+const generateSandboxData = () => {
+  const now = Date.now();
+  const dayMs = 24 * 60 * 60 * 1000;
+  
+  const sampleTags: QuestTag[] = [
+    { id: 'work', name: 'Work', color: '#5E81AC' },
+    { id: 'personal', name: 'Personal', color: '#A3BE8C' },
+    { id: 'health', name: 'Health', color: '#BF616A' },
+    { id: 'learning', name: 'Learning', color: '#EBCB8B' },
+    { id: 'creative', name: 'Creative', color: '#B48EAD' },
+    { id: 'finance', name: 'Finance', color: '#88C0D0' },
+    { id: 'social', name: 'Social', color: '#D08770' },
+  ];
+  
+  const sampleQuests: Quest[] = [
+    {
+      id: 'sandbox-1',
+      title: 'Complete Project Proposal',
+      description: 'Draft and finalize the Q1 project proposal for the new mobile app initiative.',
+      objectives: [
+        'Research market requirements',
+        'Define project scope and timeline',
+        'Create budget estimation',
+        'Present to stakeholders'
+      ],
+      type: 'main',
+      privacy: 'private',
+      priority: 'high',
+      difficulty: 'hard',
+      status: 'in_progress',
+      progress: 65,
+      completed: false,
+      createdAt: now - (5 * dayMs),
+      updatedAt: now - dayMs,
+      dueDate: now + (3 * dayMs),
+      estimatedTime: 480,
+      actualTime: 312,
+      order: 0,
+      tags: [sampleTags[0], sampleTags[3]],
+      dependencies: [],
+      timeEntries: [
+        {
+          id: 'time-1',
+          startTime: now - (4 * dayMs),
+          endTime: now - (4 * dayMs) + (2 * 60 * 60 * 1000),
+          duration: 120,
+          description: 'Initial research and planning'
+        },
+        {
+          id: 'time-2',
+          startTime: now - (2 * dayMs),
+          endTime: now - (2 * dayMs) + (3.2 * 60 * 60 * 1000),
+          duration: 192,
+          description: 'Drafting proposal document'
+        }
+      ],
+      comments: [
+        {
+          id: 'comment-1',
+          text: 'Need to include more detailed timeline breakdown',
+          createdAt: now - (2 * dayMs),
+          updatedAt: now - (2 * dayMs)
+        }
+      ],
+      isRecurring: false,
+      completedCount: 0,
+      streak: 0,
+      xpReward: 100,
+      isTemplate: false,
+    },
+    {
+      id: 'sandbox-2',
+      title: 'Daily Workout Routine',
+      description: 'Maintain consistent daily exercise routine for better health and energy.',
+      objectives: [
+        '30 minutes cardio',
+        '20 minutes strength training',
+        '10 minutes stretching'
+      ],
+      type: 'side',
+      privacy: 'private',
+      priority: 'medium',
+      difficulty: 'medium',
+      status: 'completed',
+      progress: 100,
+      completed: true,
+      createdAt: now - (30 * dayMs),
+      updatedAt: now - (6 * 60 * 60 * 1000),
+      estimatedTime: 60,
+      actualTime: 55,
+      order: 1,
+      tags: [sampleTags[2]],
+      dependencies: [],
+      timeEntries: [
+        {
+          id: 'time-3',
+          startTime: now - (6 * 60 * 60 * 1000),
+          endTime: now - (5 * 60 * 60 * 1000),
+          duration: 55,
+          description: 'Morning workout session'
+        }
+      ],
+      comments: [],
+      isRecurring: true,
+      recurringPattern: {
+        type: 'daily',
+        interval: 1
+      },
+      completedCount: 15,
+      streak: 7,
+      xpReward: 50,
+      isTemplate: false,
+    },
+    {
+      id: 'sandbox-3',
+      title: 'Learn React Native Animations',
+      description: 'Master advanced animation techniques in React Native for better UX.',
+      objectives: [
+        'Study Reanimated 3 documentation',
+        'Build sample animation components',
+        'Create smooth transitions',
+        'Optimize performance'
+      ],
+      type: 'side',
+      privacy: 'public',
+      priority: 'medium',
+      difficulty: 'hard',
+      status: 'not_started',
+      progress: 0,
+      completed: false,
+      createdAt: now - dayMs,
+      updatedAt: now - dayMs,
+      dueDate: now + (14 * dayMs),
+      estimatedTime: 720,
+      actualTime: 0,
+      order: 2,
+      tags: [sampleTags[3], sampleTags[4]],
+      dependencies: [],
+      timeEntries: [],
+      comments: [],
+      isRecurring: false,
+      completedCount: 0,
+      streak: 0,
+      xpReward: 50,
+      isTemplate: false,
+    },
+    {
+      id: 'sandbox-4',
+      title: 'Organize Digital Photos',
+      description: 'Sort and organize years of accumulated digital photos into proper folders.',
+      objectives: [
+        'Delete duplicate photos',
+        'Create year-based folders',
+        'Tag important memories',
+        'Backup to cloud storage'
+      ],
+      type: 'mini',
+      privacy: 'private',
+      priority: 'low',
+      difficulty: 'easy',
+      status: 'paused',
+      progress: 25,
+      completed: false,
+      createdAt: now - (10 * dayMs),
+      updatedAt: now - (3 * dayMs),
+      estimatedTime: 180,
+      actualTime: 45,
+      order: 3,
+      tags: [sampleTags[1]],
+      dependencies: [],
+      timeEntries: [
+        {
+          id: 'time-4',
+          startTime: now - (3 * dayMs),
+          endTime: now - (3 * dayMs) + (45 * 60 * 1000),
+          duration: 45,
+          description: 'Started sorting 2023 photos'
+        }
+      ],
+      comments: [
+        {
+          id: 'comment-2',
+          text: 'Found some great vacation photos from last summer!',
+          createdAt: now - (3 * dayMs),
+          updatedAt: now - (3 * dayMs)
+        }
+      ],
+      isRecurring: false,
+      completedCount: 0,
+      streak: 0,
+      xpReward: 25,
+      isTemplate: false,
+    },
+    {
+      id: 'sandbox-5',
+      title: 'Monthly Budget Review',
+      description: 'Analyze spending patterns and adjust budget for next month.',
+      objectives: [
+        'Review all expenses',
+        'Categorize spending',
+        'Identify savings opportunities',
+        'Set next month goals'
+      ],
+      type: 'main',
+      privacy: 'private',
+      priority: 'high',
+      difficulty: 'medium',
+      status: 'completed',
+      progress: 100,
+      completed: true,
+      createdAt: now - (7 * dayMs),
+      updatedAt: now - (2 * dayMs),
+      estimatedTime: 120,
+      actualTime: 95,
+      order: 4,
+      tags: [sampleTags[5]],
+      dependencies: [],
+      timeEntries: [
+        {
+          id: 'time-5',
+          startTime: now - (2 * dayMs),
+          endTime: now - (2 * dayMs) + (95 * 60 * 1000),
+          duration: 95,
+          description: 'Complete budget analysis'
+        }
+      ],
+      comments: [],
+      isRecurring: true,
+      recurringPattern: {
+        type: 'monthly',
+        interval: 1
+      },
+      completedCount: 3,
+      streak: 3,
+      xpReward: 100,
+      isTemplate: false,
+    },
+    {
+      id: 'sandbox-6',
+      title: 'Call Mom',
+      description: 'Weekly check-in call with family.',
+      objectives: [
+        'Catch up on family news',
+        'Share weekly updates',
+        'Plan upcoming visit'
+      ],
+      type: 'mini',
+      privacy: 'private',
+      priority: 'medium',
+      difficulty: 'easy',
+      status: 'not_started',
+      progress: 0,
+      completed: false,
+      createdAt: now - (2 * dayMs),
+      updatedAt: now - (2 * dayMs),
+      dueDate: now + dayMs,
+      estimatedTime: 30,
+      actualTime: 0,
+      order: 5,
+      tags: [sampleTags[6]],
+      dependencies: [],
+      timeEntries: [],
+      comments: [],
+      isRecurring: true,
+      recurringPattern: {
+        type: 'weekly',
+        interval: 1
+      },
+      completedCount: 8,
+      streak: 4,
+      xpReward: 25,
+      isTemplate: false,
+    }
+  ];
+  
+  const sampleStats: UserStats = {
+    totalXP: 1250,
+    level: 2,
+    currentStreak: 7,
+    longestStreak: 12,
+    totalQuestsCompleted: 18,
+    totalTimeSpent: 507,
+    averageCompletionTime: 28,
+    completionRate: 75,
+    achievements: [
+      {
+        ...defaultAchievements[0],
+        progress: 1,
+        unlockedAt: now - (20 * dayMs)
+      },
+      {
+        ...defaultAchievements[1],
+        progress: 7,
+        unlockedAt: now - (5 * dayMs)
+      },
+      {
+        ...defaultAchievements[2],
+        progress: 18
+      },
+      {
+        ...defaultAchievements[3],
+        progress: 507
+      }
+    ]
+  };
+  
+  return {
+    quests: sampleQuests,
+    tags: sampleTags,
+    userStats: sampleStats
+  };
+};
+
 const useQuestStore = create<QuestStore>()(
   persist(
     (set, get) => ({
@@ -81,6 +395,10 @@ const useQuestStore = create<QuestStore>()(
         { id: '5', name: 'Creative', color: '#B48EAD' },
       ],
       userStats: defaultUserStats,
+      
+      // Sandbox mode
+      isSandboxMode: false,
+      originalData: null,
       
       addQuest: (quest) => set((state) => {
         const newQuest: Quest = {
@@ -590,6 +908,46 @@ const useQuestStore = create<QuestStore>()(
           return true;
         });
       },
+      
+      // Sandbox mode
+      enableSandboxMode: () => set((state) => {
+        if (state.isSandboxMode) return state;
+        
+        // Store original data
+        const originalData = {
+          quests: state.quests,
+          tags: state.tags,
+          userStats: state.userStats,
+          templates: state.templates
+        };
+        
+        // Load sandbox data
+        const sandboxData = generateSandboxData();
+        
+        return {
+          ...state,
+          isSandboxMode: true,
+          originalData,
+          quests: sandboxData.quests,
+          tags: sandboxData.tags,
+          userStats: sandboxData.userStats
+        };
+      }),
+      
+      disableSandboxMode: () => set((state) => {
+        if (!state.isSandboxMode || !state.originalData) return state;
+        
+        // Restore original data
+        return {
+          ...state,
+          isSandboxMode: false,
+          quests: state.originalData.quests,
+          tags: state.originalData.tags,
+          userStats: state.originalData.userStats,
+          templates: state.originalData.templates,
+          originalData: null
+        };
+      }),
     }),
     {
       name: 'quest-storage',

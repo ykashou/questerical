@@ -104,6 +104,15 @@ export interface QuestStore {
   tags: QuestTag[];
   userStats: UserStats;
   
+  // Sandbox mode
+  isSandboxMode: boolean;
+  originalData: {
+    quests: Quest[];
+    templates: QuestTemplate[];
+    tags: QuestTag[];
+    userStats: UserStats;
+  } | null;
+  
   // Quest CRUD
   addQuest: (quest: Omit<Quest, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateQuest: (id: string, updates: Partial<Omit<Quest, 'id' | 'createdAt' | 'updatedAt'>>) => void;
@@ -148,6 +157,10 @@ export interface QuestStore {
   // Search and filter
   searchQuests: (query: string) => Quest[];
   filterQuests: (filters: QuestFilters) => Quest[];
+  
+  // Sandbox mode
+  enableSandboxMode: () => void;
+  disableSandboxMode: () => void;
 }
 
 export interface QuestFilters {

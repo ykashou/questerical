@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Filter, Search, MoreVertical, Grid, List } from 'lucide-react-native';
+import { Filter, Search, MoreVertical, Grid, List, TestTube } from 'lucide-react-native';
 import Animated, { useSharedValue } from 'react-native-reanimated';
 import { QuestType, Quest, QuestFilters } from '@/types/quest';
 import useQuestStore from '@/store/questStore';
@@ -25,7 +25,8 @@ export default function HomeScreen() {
     searchQuests, 
     filterQuests, 
     bulkUpdateQuests, 
-    bulkDeleteQuests 
+    bulkDeleteQuests,
+    isSandboxMode 
   } = useQuestStore();
   const { colors } = useThemeStore();
   
@@ -186,6 +187,16 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      {/* Sandbox Mode Banner */}
+      {isSandboxMode && (
+        <View style={[styles.sandboxBanner, { backgroundColor: colors.primary }]}>
+          <TestTube size={16} color={colors.background} />
+          <Text style={[styles.sandboxText, { color: colors.background }]}>
+            Sandbox Mode - Using sample data
+          </Text>
+        </View>
+      )}
+      
       {/* Quick Actions */}
       <QuickActions 
         onCreateQuest={() => router.push('/create')}
@@ -315,6 +326,18 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  sandboxBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    gap: 8,
+  },
+  sandboxText: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   header: {
     paddingHorizontal: 16,
