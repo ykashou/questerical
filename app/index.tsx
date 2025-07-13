@@ -10,6 +10,7 @@ import useThemeStore from '@/store/themeStore';
 import QuestCard from '@/components/QuestCard';
 import EmptyState from '@/components/EmptyState';
 import DraggableQuestCard from '@/components/DraggableQuestCard';
+import BottomNavbar from '@/components/BottomNavbar';
 import QuickActions from '@/components/QuickActions';
 import AdvancedFilters from '@/components/AdvancedFilters';
 import QuestAnalytics from '@/components/QuestAnalytics';
@@ -197,13 +198,10 @@ export default function HomeScreen() {
         </View>
       )}
       
-      {/* Quick Actions */}
-      <QuickActions 
-        onCreateQuest={() => router.push('/create')}
-        onShowFilters={() => setShowFilters(true)}
-        onShowAnalytics={() => setShowAnalytics(true)}
-        onSearch={() => {/* Implement search modal */}}
-      />
+
+
+      {/* Quick Stats */}
+      <QuickActions />
 
       {/* Header */}
       <View style={styles.header}>
@@ -293,6 +291,12 @@ export default function HomeScreen() {
       <View style={styles.content}>
         {renderQuestList()}
       </View>
+
+      {/* Bottom Navbar */}
+      <BottomNavbar 
+        onCreateQuest={() => router.push('/create')}
+        onFocusMode={() => setShowFilters(true)}
+      />
 
       {/* Filters Modal */}
       {showFilters && (
@@ -408,7 +412,7 @@ const styles = StyleSheet.create({
   listContent: {
     paddingHorizontal: 16,
     paddingTop: 16,
-    paddingBottom: 20,
+    paddingBottom: 100, // Add space for bottom navbar
   },
   emptyContainer: {
     flex: 1,
