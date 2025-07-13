@@ -157,6 +157,117 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
     onClose();
   };
 
+  // Platform-specific rendering to avoid web compatibility issues
+  if (Platform.OS === 'web') {
+    return (
+      <>
+        {isOpen && (
+          <View 
+            style={[
+              styles.overlay,
+              { 
+                backgroundColor: 'black',
+                opacity: 0.5,
+                width: isOpen ? '100%' : 0,
+              }
+            ]}
+          >
+            <TouchableOpacity 
+              style={styles.overlayTouchable}
+              onPress={onClose}
+              activeOpacity={1}
+            />
+          </View>
+        )}
+        
+        <View 
+          style={[
+            styles.container, 
+            {
+              width: isOpen ? EXPANDED_WIDTH : 0,
+              opacity: isOpen ? 1 : 0,
+              backgroundColor: colors.background,
+              borderRightColor: colors.border,
+            }
+          ]}
+        >
+          <View style={styles.header}>
+            <Text style={[styles.title, { color: colors.text }]}>Questerical</Text>
+            <TouchableOpacity onPress={onClose} hitSlop={10}>
+              <X size={24} color={colors.text} />
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.mainTabsContainer}>
+            {mainTabs.map((tab) => (
+              <TouchableOpacity
+                key={tab.name}
+                style={[
+                  styles.tab,
+                  pathname === tab.path ? { backgroundColor: colors.card } : null
+                ]}
+                onPress={() => handleNavigation(tab.path)}
+              >
+                <View style={styles.iconContainer}>
+                  {tab.icon}
+                </View>
+                <Text 
+                  style={[
+                    styles.tabLabel, 
+                    { color: pathname === tab.path ? colors.primary : colors.text }
+                  ]}
+                >
+                  {tab.label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          
+          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+          
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Features</Text>
+          
+          <View style={styles.featureTabsContainer}>
+            {featureTabs.map((tab) => (
+              <TouchableOpacity
+                key={tab.name}
+                style={[
+                  styles.tab,
+                  (tab.path && pathname === tab.path) ? { backgroundColor: colors.card } : null
+                ]}
+                onPress={() => {
+                  if (tab.path) {
+                    handleNavigation(tab.path);
+                  } else if (tab.onPress) {
+                    tab.onPress();
+                  }
+                }}
+              >
+                <View style={styles.iconContainer}>
+                  {tab.icon}
+                </View>
+                <Text style={[
+                  styles.tabLabel, 
+                  { color: (tab.path && pathname === tab.path) ? colors.primary : colors.text }
+                ]}>
+                  {tab.label}
+                </Text>
+                {tab.badge && tab.badge > 0 && (
+                  <View style={[styles.badge, { backgroundColor: colors.danger }]}>
+                    <Text style={[styles.badgeText, { color: colors.text }]}>
+                      {tab.badge > 99 ? '99+' : tab.badge.toString()}
+                    </Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      </>
+    );
+  }
+
+  // Native rendering with animations
   return (
     <>
       {isOpen && (
@@ -249,7 +360,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
               {tab.badge && tab.badge > 0 && (
                 <View style={[styles.badge, { backgroundColor: colors.danger }]}>
                   <Text style={[styles.badgeText, { color: colors.text }]}>
-                    {tab.badge > 99 ? '99+' : tab.badge}
+                    {tab.badge > 99 ? '99+' : tab.badge.toString()}
                   </Text>
                 </View>
               )}
