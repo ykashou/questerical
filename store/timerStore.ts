@@ -239,13 +239,13 @@ const useTimerStore = create<TimerStore>()(
           // Stop time tracking without saving if timer is reset
           const questStore = require('@/store/questStore').default;
           if (questStore.getState) {
-            const quest = questStore.getState().quests.find(q => q.id === state.currentSession?.questId);
+            const quest = questStore.getState().quests.find((q: any) => q.id === state.currentSession?.questId);
             if (quest) {
-              const activeEntry = quest.timeEntries.find(entry => !entry.endTime);
+              const activeEntry = quest.timeEntries.find((entry: any) => !entry.endTime);
               if (activeEntry) {
                 // Remove the active time entry since timer was reset
                 questStore.getState().updateQuest(quest.id, {
-                  timeEntries: quest.timeEntries.filter(entry => entry.id !== activeEntry.id)
+                  timeEntries: quest.timeEntries.filter((entry: any) => entry.id !== activeEntry.id)
                 });
               }
             }
