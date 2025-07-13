@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 import useThemeStore from '@/store/themeStore';
@@ -97,7 +97,17 @@ export default function CalendarScreen() {
   const handleDayPress = (day: number, event: any) => {
     // Get the position of the touch for tooltip placement
     const { pageX, pageY } = event.nativeEvent;
-    setTooltipPosition({ x: pageX, y: pageY - 120 }); // Adjust Y to show above finger
+    const screenHeight = Dimensions.get('window').height;
+    
+    // Calculate better initial position
+    let tooltipY = pageY - 140; // Try to show above touch point
+    
+    // If too close to top, show below instead
+    if (tooltipY < 100) {
+      tooltipY = pageY + 40;
+    }
+    
+    setTooltipPosition({ x: pageX, y: tooltipY });
     
     const newDate = new Date(currentDate);
     newDate.setDate(day);
@@ -278,12 +288,14 @@ export default function CalendarScreen() {
       </ScrollView>
       
       {selectedDate && (
-        <CalendarTooltip 
-          date={selectedDate}
-          position={tooltipPosition}
-          data={completionData}
-          onClose={() => setSelectedDate(null)}
-        />
+        <View style={styles.tooltipContainer}>
+          <CalendarTooltip 
+            date={selectedDate}
+            position={tooltipPosition}
+            data={completionData}
+            onClose={() => setSelectedDate(null)}
+          />
+        </View>
       )}
     </SafeAreaView>
   );
@@ -375,5 +387,13 @@ const styles = StyleSheet.create({
   },
   legendText: {
     fontSize: 12,
+  },
+  tooltipContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    pointerEvents: 'box-none',
   },
 });

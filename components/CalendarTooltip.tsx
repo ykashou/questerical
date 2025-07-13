@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import { X } from 'lucide-react-native';
 import useThemeStore from '@/store/themeStore';
 
@@ -17,6 +17,7 @@ interface CalendarTooltipProps {
 
 export default function CalendarTooltip({ date, position, data, onClose }: CalendarTooltipProps) {
   const { colors } = useThemeStore();
+  const [adjustedPosition, setAdjustedPosition] = useState(position);
   
   const formatDate = (date: Date) => {
     const options: Intl.DateTimeFormatOptions = { 
@@ -28,6 +29,34 @@ export default function CalendarTooltip({ date, position, data, onClose }: Calen
     return date.toLocaleDateString(undefined, options);
   };
 
+  useEffect(() => {
+    const screenWidth = Dimensions.get('window').width;
+    const screenHeight = Dimensions.get('window').height;
+    const tooltipWidth = 300;
+    const tooltipHeight = 160; // Approximate height of the tooltip
+    
+    let adjustedX = position.x - (tooltipWidth / 2); // Center horizontally
+    let adjustedY = position.y;
+    
+    // Prevent horizontal overflow
+    if (adjustedX < 16) {
+      adjustedX = 16; // Left margin
+    } else if (adjustedX + tooltipWidth > screenWidth - 16) {
+      adjustedX = screenWidth - tooltipWidth - 16; // Right margin
+    }
+    
+    // Prevent vertical overflow
+    if (adjustedY < 60) {
+      // If tooltip would go above screen, show it below the touch point
+      adjustedY = position.y + 60;
+    } else if (adjustedY + tooltipHeight > screenHeight - 100) {
+      // If tooltip would go below screen, show it above the touch point
+      adjustedY = position.y - tooltipHeight - 20;
+    }
+    
+    setAdjustedPosition({ x: adjustedX, y: adjustedY });
+  }, [position]);
+
   return (
     <View 
       style={[
@@ -35,8 +64,8 @@ export default function CalendarTooltip({ date, position, data, onClose }: Calen
         { 
           backgroundColor: colors.card,
           borderColor: colors.border,
-          top: position.y,
-          left: position.x - 150, // Center the tooltip
+          top: adjustedPosition.y,
+          left: adjustedPosition.x,
         }
       ]}
     >
