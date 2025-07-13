@@ -22,10 +22,19 @@ export default function FocusModeOverlay() {
     : 0;
   
   return (
-    <View style={[styles.overlay, { backgroundColor: colors.primary + '15' }]}>
-      <View style={[styles.banner, { backgroundColor: colors.primary }]}>
+    <View style={[styles.overlay, { backgroundColor: colors.primary + '10' }]}>
+      <View style={[styles.banner, { 
+        backgroundColor: colors.primary,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        elevation: 4,
+      }]}>
         <View style={styles.bannerContent}>
-          <Target size={20} color={colors.background} />
+          <View style={[styles.iconContainer, { backgroundColor: colors.background + '20' }]}>
+            <Target size={18} color={colors.background} />
+          </View>
           <View style={styles.bannerText}>
             <Text style={[styles.bannerTitle, { color: colors.background }]}>
               Focus Mode Active
@@ -37,16 +46,23 @@ export default function FocusModeOverlay() {
         </View>
         
         <TouchableOpacity
-          style={styles.closeButton}
+          style={[styles.closeButton, { backgroundColor: colors.background + '20' }]}
           onPress={disableFocusMode}
           activeOpacity={0.7}
         >
-          <X size={20} color={colors.background} />
+          <X size={18} color={colors.background} />
         </TouchableOpacity>
       </View>
       
       {focusMode.customMessage && (
-        <View style={[styles.messageContainer, { backgroundColor: colors.card }]}>
+        <View style={[styles.messageContainer, { 
+          backgroundColor: colors.card,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.05,
+          shadowRadius: 4,
+          elevation: 2,
+        }]}>
           <Text style={[styles.message, { color: colors.text }]}>
             {focusMode.customMessage}
           </Text>
@@ -92,8 +108,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     paddingTop: 50, // Account for status bar
   },
   bannerContent: {
@@ -101,6 +117,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
     flex: 1,
+  },
+  iconContainer: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bannerText: {
     flex: 1,
@@ -114,13 +137,14 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   closeButton: {
-    padding: 4,
+    padding: 8,
+    borderRadius: 12,
   },
   messageContainer: {
-    marginHorizontal: 16,
-    marginTop: 8,
-    padding: 12,
-    borderRadius: 8,
+    marginHorizontal: 20,
+    marginTop: 12,
+    padding: 16,
+    borderRadius: 12,
   },
   message: {
     fontSize: 14,

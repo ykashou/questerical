@@ -27,17 +27,17 @@ export const nordDark = {
 };
 
 export const nordLight = {
-  background: '#ECEFF4',
-  card: '#E5E9F0',
+  background: '#FEFEFE',
+  card: '#FFFFFF',
   text: '#2E3440',
   textSecondary: '#4C566A',
   primary: '#5E81AC',
   secondary: '#81A1C1',
   accent: '#88C0D0',
-  success: '#8FBCBB',
+  success: '#A3BE8C',
   danger: '#BF616A',
   warning: '#EBCB8B',
-  border: '#D8DEE9',
+  border: '#E5E9F0',
   overlay: 'rgba(236, 239, 244, 0.8)',
   
   questTypes: {

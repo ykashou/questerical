@@ -378,10 +378,10 @@ export default function QuestCard({ quest, isSelected, onSelect, showTimeTrackin
 const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
-    marginBottom: 10,
+    marginBottom: 12,
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: 12,
+    borderRadius: 16,
   },
   actionsContainer: {
     position: 'absolute',
@@ -419,9 +419,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   container: {
-    borderRadius: 12,
-    padding: 14,
+    borderRadius: 16,
+    padding: 16,
     borderLeftWidth: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
   header: {
     flexDirection: 'row',

@@ -221,11 +221,16 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
+    borderRadius: 20,
     borderWidth: 1,
-    padding: 20,
+    padding: 24,
     alignItems: 'center',
-    gap: 16,
+    gap: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
   compactContainer: {
     padding: 12,
@@ -293,8 +298,8 @@ const styles = StyleSheet.create({
   },
   // Horizontal timer bar styles
   horizontalContainer: {
-    borderRadius: 8,
-    padding: 8,
+    borderRadius: 12,
+    padding: 12,
     marginTop: 8,
   },
   horizontalContent: {

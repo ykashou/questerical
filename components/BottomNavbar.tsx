@@ -125,25 +125,25 @@ export default function BottomNavbar({
       paddingBottom: Platform.OS === 'ios' ? 34 : 16, // Account for home indicator on iOS
     }]}>
       <TouchableOpacity
-        style={styles.iconButton}
+        style={[styles.iconButton, { backgroundColor: colors.primary + '15' }]}
         onPress={handleCreateQuest}
-        activeOpacity={0.6}
+        activeOpacity={0.7}
       >
         <Plus size={24} color={colors.primary} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.iconButton}
+        style={[styles.iconButton, isTimerActive && { backgroundColor: colors.success + '15' }]}
         onPress={handleStartTimer}
-        activeOpacity={0.6}
+        activeOpacity={0.7}
       >
         <Clock size={24} color={isTimerActive ? colors.success : hasActiveTimeTracking ? colors.warning : colors.text} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.iconButton}
+        style={[styles.iconButton, focusMode.isActive && { backgroundColor: colors.success + '15' }]}
         onPress={handleFocusMode}
-        activeOpacity={0.6}
+        activeOpacity={0.7}
       >
         <Target size={24} color={focusMode.isActive ? colors.success : colors.text} />
       </TouchableOpacity>
@@ -154,15 +154,21 @@ export default function BottomNavbar({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 24,
-    paddingTop: 16,
+    paddingHorizontal: 32,
+    paddingTop: 20,
     borderTopWidth: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 8,
   },
   iconButton: {
-    padding: 12,
+    padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 20,
   },
 });

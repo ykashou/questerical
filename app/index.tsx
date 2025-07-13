@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Dimensions, Platform, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Filter, Search, MoreVertical, Grid, List, TestTube } from 'lucide-react-native';
+import { Filter, Search, MoreVertical, Grid, List, TestTube, Sparkles } from 'lucide-react-native';
 import Animated, { useSharedValue } from 'react-native-reanimated';
 import { QuestType, Quest, QuestFilters } from '@/types/quest';
 import useQuestStore from '@/store/questStore';
@@ -192,6 +192,11 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <StatusBar 
+        barStyle={colors.background === '#FEFEFE' ? 'dark-content' : 'light-content'} 
+        backgroundColor={colors.background} 
+      />
+      
       {/* Sandbox Mode Banner */}
       {isSandboxMode && (
         <View style={[styles.sandboxBanner, { backgroundColor: colors.primary }]}>
@@ -217,6 +222,16 @@ export default function HomeScreen() {
 
       {/* Header */}
       <View style={styles.header}>
+        <View style={styles.headerTop}>
+          <View style={styles.welcomeSection}>
+            <Text style={[styles.welcomeText, { color: colors.textSecondary }]}>Welcome back</Text>
+            <View style={styles.titleRow}>
+              <Text style={[styles.appTitle, { color: colors.text }]}>Questerical</Text>
+              <Sparkles size={20} color={colors.primary} />
+            </View>
+          </View>
+        </View>
+        
         <ScrollView 
           horizontal 
           showsHorizontalScrollIndicator={false} 
@@ -228,11 +243,17 @@ export default function HomeScreen() {
               style={[
                 styles.tab,
                 { 
+                  backgroundColor: colors.card,
                   borderColor: colors.border,
                 },
                 activeTab === tab.value && { 
                   backgroundColor: colors.questTypes[tab.value],
                   borderColor: colors.questTypes[tab.value],
+                  shadowColor: colors.questTypes[tab.value],
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 4,
+                  elevation: 4,
                 },
               ]}
               onPress={() => setActiveTab(tab.value)}
@@ -241,7 +262,7 @@ export default function HomeScreen() {
                 style={[
                   styles.tabText,
                   { color: colors.textSecondary },
-                  activeTab === tab.value && [styles.activeTabText, { color: colors.text }],
+                  activeTab === tab.value && [styles.activeTabText, { color: colors.background }],
                 ]}
               >
                 {tab.label}
@@ -359,8 +380,28 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   header: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     paddingBottom: 16,
+  },
+  headerTop: {
+    marginBottom: 20,
+  },
+  welcomeSection: {
+    gap: 4,
+  },
+  welcomeText: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  appTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    letterSpacing: -0.5,
   },
   tabsContainer: {
     paddingRight: 16,
@@ -368,9 +409,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   tab: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 25,
     borderWidth: 1,
   },
   tabText: {
@@ -425,9 +466,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 100, // Add space for bottom navbar
+    paddingHorizontal: 20,
+    paddingTop: 8,
+    paddingBottom: 120, // Add space for bottom navbar
   },
   emptyContainer: {
     flex: 1,

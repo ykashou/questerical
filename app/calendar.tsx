@@ -163,13 +163,13 @@ export default function CalendarScreen() {
       const dateKey = `${year}-${month + 1}-${day}`;
       const dayData = dailyCompletions[dateKey] || { total: 0 };
       
-      // Determine heat color based on completion count
+      // Determine heat color based on completion count with green hue
       let heatColor = colors.background;
       if (dayData.total > 0) {
         const intensity = Math.min(dayData.total / 5, 1); // Max intensity at 5 completions
         heatColor = dayData.total >= 5 
-          ? colors.success 
-          : `rgba(${parseInt(colors.success.slice(1, 3), 16)}, ${parseInt(colors.success.slice(3, 5), 16)}, ${parseInt(colors.success.slice(5, 7), 16)}, ${intensity})`;
+          ? '#A3BE8C' 
+          : `rgba(163, 190, 140, ${intensity})`;
       }
       
       // Check if this day is selected
@@ -237,16 +237,16 @@ export default function CalendarScreen() {
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <View style={styles.header}>
         <View style={styles.monthSelector}>
-          <TouchableOpacity onPress={handlePrevMonth} style={styles.navButton}>
-            <ChevronLeft size={24} color={colors.text} />
+          <TouchableOpacity onPress={handlePrevMonth} style={[styles.navButton, { backgroundColor: colors.card }]}>
+            <ChevronLeft size={20} color={colors.text} />
           </TouchableOpacity>
           
           <Text style={[styles.monthYearText, { color: colors.text }]}>
             {MONTHS[currentDate.getMonth()]} {currentDate.getFullYear()}
           </Text>
           
-          <TouchableOpacity onPress={handleNextMonth} style={styles.navButton}>
-            <ChevronRight size={24} color={colors.text} />
+          <TouchableOpacity onPress={handleNextMonth} style={[styles.navButton, { backgroundColor: colors.card }]}>
+            <ChevronRight size={20} color={colors.text} />
           </TouchableOpacity>
         </View>
       </View>
@@ -272,15 +272,15 @@ export default function CalendarScreen() {
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>None</Text>
             </View>
             <View style={styles.legendItem}>
-              <View style={[styles.legendColor, { backgroundColor: colors.success + '40' }]} />
+              <View style={[styles.legendColor, { backgroundColor: '#A3BE8C40' }]} />
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>Low</Text>
             </View>
             <View style={styles.legendItem}>
-              <View style={[styles.legendColor, { backgroundColor: colors.success + '80' }]} />
+              <View style={[styles.legendColor, { backgroundColor: '#A3BE8C80' }]} />
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>Medium</Text>
             </View>
             <View style={styles.legendItem}>
-              <View style={[styles.legendColor, { backgroundColor: colors.success }]} />
+              <View style={[styles.legendColor, { backgroundColor: '#A3BE8C' }]} />
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>High</Text>
             </View>
           </View>
@@ -306,8 +306,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
   },
   monthSelector: {
     flexDirection: 'row',
@@ -316,14 +316,16 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   navButton: {
-    padding: 8,
+    padding: 12,
+    borderRadius: 12,
   },
   monthYearText: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 22,
+    fontWeight: '700',
+    letterSpacing: -0.5,
   },
   calendarContainer: {
-    padding: 16,
+    padding: 20,
   },
   weekdaysRow: {
     flexDirection: 'row',
@@ -363,8 +365,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   legend: {
-    marginTop: 24,
-    paddingHorizontal: 16,
+    marginTop: 32,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
   },
   legendTitle: {
     fontSize: 16,

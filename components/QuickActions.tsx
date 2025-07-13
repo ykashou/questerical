@@ -21,8 +21,15 @@ export default function QuickActions() {
     label: string;
     color: string;
   }) => (
-    <View style={[styles.statItem, { backgroundColor: colors.card }]}>
-      <View style={[styles.statIcon, { backgroundColor: color + '20' }]}>
+    <View style={[styles.statItem, { 
+      backgroundColor: colors.card,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 8,
+      elevation: 2,
+    }]}>
+      <View style={[styles.statIcon, { backgroundColor: color + '15' }]}>
         {icon}
       </View>
       <Text style={[styles.statValue, { color: colors.text }]}>{value}</Text>
@@ -69,34 +76,35 @@ export default function QuickActions() {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: 24,
   },
   statsContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     paddingBottom: 16,
-    gap: 12,
+    gap: 16,
   },
   statItem: {
     alignItems: 'center',
-    padding: 12,
-    borderRadius: 12,
-    minWidth: 80,
+    padding: 16,
+    borderRadius: 16,
+    minWidth: 90,
   },
   statIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 8,
+    marginBottom: 12,
   },
   statValue: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
-    marginBottom: 2,
+    marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
     fontWeight: '500',
+    textAlign: 'center',
   },
 });

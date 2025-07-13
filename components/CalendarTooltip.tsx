@@ -32,27 +32,31 @@ export default function CalendarTooltip({ date, position, data, onClose }: Calen
   useEffect(() => {
     const screenWidth = Dimensions.get('window').width;
     const screenHeight = Dimensions.get('window').height;
-    const tooltipWidth = 300;
+    const tooltipWidth = 280;
     const tooltipHeight = 160; // Approximate height of the tooltip
+    const margin = 20;
     
     let adjustedX = position.x - (tooltipWidth / 2); // Center horizontally
     let adjustedY = position.y;
     
-    // Prevent horizontal overflow
-    if (adjustedX < 16) {
-      adjustedX = 16; // Left margin
-    } else if (adjustedX + tooltipWidth > screenWidth - 16) {
-      adjustedX = screenWidth - tooltipWidth - 16; // Right margin
+    // Prevent horizontal overflow with better margins
+    if (adjustedX < margin) {
+      adjustedX = margin;
+    } else if (adjustedX + tooltipWidth > screenWidth - margin) {
+      adjustedX = screenWidth - tooltipWidth - margin;
     }
     
-    // Prevent vertical overflow
-    if (adjustedY < 60) {
+    // Prevent vertical overflow with better positioning
+    if (adjustedY < 100) {
       // If tooltip would go above screen, show it below the touch point
       adjustedY = position.y + 60;
-    } else if (adjustedY + tooltipHeight > screenHeight - 100) {
+    } else if (adjustedY + tooltipHeight > screenHeight - 120) {
       // If tooltip would go below screen, show it above the touch point
-      adjustedY = position.y - tooltipHeight - 20;
+      adjustedY = position.y - tooltipHeight - 40;
     }
+    
+    // Ensure tooltip stays within screen bounds
+    adjustedY = Math.max(60, Math.min(adjustedY, screenHeight - tooltipHeight - 60));
     
     setAdjustedPosition({ x: adjustedX, y: adjustedY });
   }, [position]);
@@ -110,15 +114,15 @@ export default function CalendarTooltip({ date, position, data, onClose }: Calen
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width: 300,
+    width: 280,
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 16,
     borderWidth: 1,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
     zIndex: 1000,
   },
   header: {

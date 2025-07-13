@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    padding: 16,
+    padding: 20,
   },
   header: {
     flexDirection: 'row',
@@ -237,9 +237,10 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: '700',
     flex: 1,
+    letterSpacing: -0.5,
   },
   completionButton: {
     padding: 4,
@@ -317,9 +318,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   timeEntry: {
-    padding: 12,
-    borderRadius: 8,
+    padding: 16,
+    borderRadius: 12,
     marginBottom: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 1,
   },
   timeEntryText: {
     fontSize: 14,
@@ -330,18 +336,23 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   totalTime: {
-    padding: 12,
-    borderRadius: 8,
+    padding: 16,
+    borderRadius: 12,
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 12,
   },
   totalTimeText: {
     fontSize: 16,
     fontWeight: '700',
   },
   energyContainer: {
-    padding: 16,
-    borderRadius: 12,
+    padding: 20,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
   energyInfo: {
     flexDirection: 'row',
