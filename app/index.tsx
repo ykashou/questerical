@@ -202,8 +202,6 @@ export default function HomeScreen() {
         </View>
       )}
       
-
-
       {/* Focus Mode Overlay */}
       <FocusModeOverlay />
       

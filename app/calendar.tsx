@@ -272,11 +272,11 @@ export default function CalendarScreen() {
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>None</Text>
             </View>
             <View style={styles.legendItem}>
-              <View style={[styles.legendColor, { backgroundColor: `rgba(${parseInt(colors.success.slice(1, 3), 16)}, ${parseInt(colors.success.slice(3, 5), 16)}, ${parseInt(colors.success.slice(5, 7), 16)}, 0.2)` }]} />
+              <View style={[styles.legendColor, { backgroundColor: colors.success + '40' }]} />
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>Low</Text>
             </View>
             <View style={styles.legendItem}>
-              <View style={[styles.legendColor, { backgroundColor: `rgba(${parseInt(colors.success.slice(1, 3), 16)}, ${parseInt(colors.success.slice(3, 5), 16)}, ${parseInt(colors.success.slice(5, 7), 16)}, 0.5)` }]} />
+              <View style={[styles.legendColor, { backgroundColor: colors.success + '80' }]} />
               <Text style={[styles.legendText, { color: colors.textSecondary }]}>Medium</Text>
             </View>
             <View style={styles.legendItem}>

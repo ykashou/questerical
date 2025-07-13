@@ -144,6 +144,47 @@ export default function QuestDetailScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Timer</Text>
           <TimerDisplay questId={quest.id} />
+          
+          {/* Timer Log */}
+          {quest.timeEntries.length > 0 && (
+            <View style={styles.timerLog}>
+              <Text style={[styles.subSectionTitle, { color: colors.text }]}>Time Log</Text>
+              {quest.timeEntries.map((entry) => (
+                <View key={entry.id} style={[styles.timeEntry, { backgroundColor: colors.card }]}>
+                  <Text style={[styles.timeEntryText, { color: colors.text }]}>
+                    {new Date(entry.startTime).toLocaleDateString()} - {Math.round(entry.duration)}m
+                  </Text>
+                  {entry.description && (
+                    <Text style={[styles.timeEntryDescription, { color: colors.textSecondary }]}>
+                      {entry.description}
+                    </Text>
+                  )}
+                </View>
+              ))}
+              <View style={[styles.totalTime, { backgroundColor: colors.primary + '20' }]}>
+                <Text style={[styles.totalTimeText, { color: colors.primary }]}>
+                  Total: {Math.round(quest.actualTime)}m
+                </Text>
+              </View>
+            </View>
+          )}
+        </View>
+        
+        {/* Energy Section */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Energy</Text>
+          <View style={[styles.energyContainer, { backgroundColor: colors.card }]}>
+            <View style={styles.energyInfo}>
+              <Text style={[styles.energyLabel, { color: colors.textSecondary }]}>Story Points</Text>
+              <Text style={[styles.energyValue, { color: colors.warning }]}>{quest.xpReward}</Text>
+            </View>
+            <View style={styles.energyBar}>
+              <View style={[styles.energyBarFill, { backgroundColor: colors.warning, width: `${Math.min((quest.xpReward / 100) * 100, 100)}%` }]} />
+            </View>
+            <Text style={[styles.energyDescription, { color: colors.textSecondary }]}>
+              Estimated effort based on difficulty and scope
+            </Text>
+          </View>
         </View>
         
         <View style={styles.actions}>
@@ -266,5 +307,69 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontWeight: '600',
+  },
+  timerLog: {
+    marginTop: 16,
+  },
+  subSectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  timeEntry: {
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  timeEntryText: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  timeEntryDescription: {
+    fontSize: 12,
+    marginTop: 4,
+  },
+  totalTime: {
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  totalTimeText: {
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  energyContainer: {
+    padding: 16,
+    borderRadius: 12,
+  },
+  energyInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  energyLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  energyValue: {
+    fontSize: 24,
+    fontWeight: '700',
+  },
+  energyBar: {
+    height: 8,
+    backgroundColor: 'rgba(235, 203, 139, 0.2)',
+    borderRadius: 4,
+    overflow: 'hidden',
+    marginBottom: 8,
+  },
+  energyBarFill: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  energyDescription: {
+    fontSize: 12,
+    textAlign: 'center',
   },
 });

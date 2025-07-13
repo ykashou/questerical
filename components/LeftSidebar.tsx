@@ -176,7 +176,9 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
               style={styles.overlayTouchable}
               onPress={onClose}
               activeOpacity={1}
-            />
+            >
+              <Text style={{ opacity: 0 }}></Text>
+            </TouchableOpacity>
           </View>
         )}
         
@@ -282,7 +284,9 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
             style={styles.overlayTouchable}
             onPress={onClose}
             activeOpacity={1}
-          />
+          >
+            <Text style={{ opacity: 0 }}></Text>
+          </TouchableOpacity>
         </Animated.View>
       )}
       
