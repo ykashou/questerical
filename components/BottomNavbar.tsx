@@ -61,38 +61,27 @@ export default function BottomNavbar({
       paddingBottom: Platform.OS === 'ios' ? 34 : 16, // Account for home indicator on iOS
     }]}>
       <TouchableOpacity
-        style={[styles.actionButton, { backgroundColor: colors.primary }]}
+        style={styles.iconButton}
         onPress={handleCreateQuest}
-        activeOpacity={0.8}
+        activeOpacity={0.6}
       >
-        <Plus size={20} color={colors.background} />
-        <Text style={[styles.actionLabel, { color: colors.background }]}>
-          New Quest
-        </Text>
+        <Plus size={24} color={colors.primary} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[styles.actionButton, { 
-          backgroundColor: hasActiveTimeTracking ? colors.success : colors.accent 
-        }]}
+        style={styles.iconButton}
         onPress={handleStartTimer}
-        activeOpacity={0.8}
+        activeOpacity={0.6}
       >
-        <Clock size={20} color={colors.background} />
-        <Text style={[styles.actionLabel, { color: colors.background }]}>
-          {hasActiveTimeTracking ? 'Timer Active' : 'Start Timer'}
-        </Text>
+        <Clock size={24} color={hasActiveTimeTracking ? colors.success : colors.text} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[styles.actionButton, { backgroundColor: colors.warning }]}
+        style={styles.iconButton}
         onPress={handleFocusMode}
-        activeOpacity={0.8}
+        activeOpacity={0.6}
       >
-        <Target size={20} color={colors.background} />
-        <Text style={[styles.actionLabel, { color: colors.background }]}>
-          Focus Mode
-        </Text>
+        <Target size={24} color={colors.warning} />
       </TouchableOpacity>
     </View>
   );
@@ -101,23 +90,15 @@ export default function BottomNavbar({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
+    paddingHorizontal: 24,
     paddingTop: 16,
     borderTopWidth: 1,
-    gap: 12,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
-  actionButton: {
-    flex: 1,
-    flexDirection: 'row',
+  iconButton: {
+    padding: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 12,
-    gap: 8,
-  },
-  actionLabel: {
-    fontSize: 14,
-    fontWeight: '600',
   },
 });
