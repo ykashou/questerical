@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Dimensions, Platform } from 'react-native';
 import { usePathname, useRouter } from 'expo-router';
 import { 
-  Home, 
+  BarChart3, 
   PlusCircle, 
   Settings, 
   Calendar, 
@@ -12,7 +12,8 @@ import {
   Star, 
   Search,
   Menu,
-  X
+  X,
+  Sword
 } from 'lucide-react-native';
 import useThemeStore from '@/store/themeStore';
 import useNotificationStore from '@/store/notificationStore';
@@ -84,10 +85,16 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
 
   const mainTabs: MainTab[] = [
     { 
-      name: 'home', 
-      icon: <Home size={24} color={pathname === '/' ? colors.primary : colors.text} />,
-      label: 'Home',
+      name: 'analytics', 
+      icon: <BarChart3 size={24} color={pathname === '/' ? colors.primary : colors.text} />,
+      label: 'Analytics',
       path: '/'
+    },
+    { 
+      name: 'quests', 
+      icon: <Sword size={24} color={pathname === '/quests' ? colors.primary : colors.text} />,
+      label: 'Quests',
+      path: '/quests'
     },
     { 
       name: 'create', 
@@ -192,7 +199,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
           ]}
         >
           <View style={styles.header}>
-            <Text style={[styles.title, { color: colors.text }]}>Questerical</Text>
+<Text style={[styles.title, { color: colors.text }]}>Questerical</Text>
             <TouchableOpacity onPress={onClose} hitSlop={10}>
               <X size={24} color={colors.text} />
             </TouchableOpacity>
@@ -297,7 +304,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
         ]}
       >
         <View style={styles.header}>
-          <Text style={[styles.title, { color: colors.text }]}>Questerical</Text>
+<Text style={[styles.title, { color: colors.text }]}>Questerical</Text>
           <TouchableOpacity onPress={onClose} hitSlop={10}>
             <X size={24} color={colors.text} />
           </TouchableOpacity>
