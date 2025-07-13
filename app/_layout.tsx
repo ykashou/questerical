@@ -40,7 +40,7 @@ export default function RootLayout() {
           <Tabs.Screen
             name="index"
             options={{
-              title: 'Quest Log',
+              title: 'Questerical',
             }}
           />
           <Tabs.Screen

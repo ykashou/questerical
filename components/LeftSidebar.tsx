@@ -180,7 +180,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
         ]}
       >
         <View style={styles.header}>
-          <Text style={[styles.title, { color: colors.text }]}>Quest Log</Text>
+          <Text style={[styles.title, { color: colors.text }]}>Questerical</Text>
           <TouchableOpacity onPress={onClose} hitSlop={10}>
             <X size={24} color={colors.text} />
           </TouchableOpacity>
