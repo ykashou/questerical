@@ -149,7 +149,6 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
         [0, 0.5],
         Extrapolate.CLAMP
       ),
-      display: opacity.value === 0 ? 'none' : 'flex',
     };
   });
 
@@ -160,19 +159,21 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
 
   return (
     <>
-      <Animated.View 
-        style={[
-          styles.overlay,
-          overlayStyle,
-          { backgroundColor: 'black' }
-        ]}
-      >
-        <TouchableOpacity 
-          style={styles.overlayTouchable}
-          onPress={onClose}
-          activeOpacity={1}
-        />
-      </Animated.View>
+      {isOpen && (
+        <Animated.View 
+          style={[
+            styles.overlay,
+            overlayStyle,
+            { backgroundColor: 'black' }
+          ]}
+        >
+          <TouchableOpacity 
+            style={styles.overlayTouchable}
+            onPress={onClose}
+            activeOpacity={1}
+          />
+        </Animated.View>
+      )}
       
       <Animated.View 
         style={[
