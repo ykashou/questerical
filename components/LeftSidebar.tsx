@@ -198,7 +198,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
               key={tab.name}
               style={[
                 styles.tab,
-                pathname === tab.path && { backgroundColor: colors.card }
+                pathname === tab.path ? { backgroundColor: colors.card } : null
               ]}
               onPress={() => handleNavigation(tab.path)}
             >
@@ -227,7 +227,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
               key={tab.name}
               style={[
                 styles.tab,
-                tab.path && pathname === tab.path && { backgroundColor: colors.card }
+                (tab.path && pathname === tab.path) ? { backgroundColor: colors.card } : null
               ]}
               onPress={() => {
                 if (tab.path) {
@@ -242,7 +242,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
               </View>
               <Text style={[
                 styles.tabLabel, 
-                { color: tab.path && pathname === tab.path ? colors.primary : colors.text }
+                { color: (tab.path && pathname === tab.path) ? colors.primary : colors.text }
               ]}>
                 {tab.label}
               </Text>
