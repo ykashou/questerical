@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Moon, Sun, Trash2, Info, TestTube, ArrowLeft } from 'lucide-react-native';
+import { Moon, Sun, Trash2, Info, TestTube, ArrowLeft, Clock, Target, ChevronRight } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 import useThemeStore from '@/store/themeStore';
 import useQuestStore from '@/store/questStore';
+import useTimerStore from '@/store/timerStore';
 
 // Define proper types for settings items
 type SwitchSettingItem = {
@@ -39,6 +41,7 @@ type SettingSection = {
 };
 
 export default function SettingsScreen() {
+  const router = useRouter();
   const { colors, theme, toggleTheme } = useThemeStore();
   const { 
     deleteQuest, 
@@ -47,6 +50,7 @@ export default function SettingsScreen() {
     enableSandboxMode, 
     disableSandboxMode 
   } = useQuestStore();
+  const { settings, updateSettings } = useTimerStore();
   
   const handleClearAllQuests = () => {
     if (isSandboxMode) {
@@ -114,6 +118,33 @@ export default function SettingsScreen() {
           type: 'switch',
           value: theme === 'dark',
           onToggle: toggleTheme,
+        },
+      ],
+    },
+    {
+      title: 'Timer Settings',
+      items: [
+        {
+          icon: <Clock size={22} color={colors.primary} />,
+          title: 'Timer Configuration',
+          type: 'button',
+          buttonText: 'Configure',
+          buttonColor: colors.primary,
+          onPress: () => router.push('/timer-settings'),
+        },
+        {
+          icon: <Target size={22} color={colors.text} />,
+          title: 'Auto-start Breaks',
+          type: 'switch',
+          value: settings.autoStartBreaks,
+          onToggle: () => updateSettings({ autoStartBreaks: !settings.autoStartBreaks }),
+        },
+        {
+          icon: <Target size={22} color={colors.text} />,
+          title: 'Sound Notifications',
+          type: 'switch',
+          value: settings.soundEnabled,
+          onToggle: () => updateSettings({ soundEnabled: !settings.soundEnabled }),
         },
       ],
     },

@@ -1,4 +1,4 @@
-export type NotificationType = 'due_soon' | 'overdue' | 'achievement' | 'streak' | 'recurring' | 'completion';
+export type NotificationType = 'due_soon' | 'overdue' | 'achievement' | 'streak' | 'recurring' | 'completion' | 'timer' | 'focus';
 export type NotificationPriority = 'low' | 'medium' | 'high' | 'urgent';
 
 export interface Notification {

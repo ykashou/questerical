@@ -7,6 +7,7 @@ import Animated, { useSharedValue } from 'react-native-reanimated';
 import { QuestType, Quest, QuestFilters } from '@/types/quest';
 import useQuestStore from '@/store/questStore';
 import useThemeStore from '@/store/themeStore';
+import useTimerStore from '@/store/timerStore';
 import QuestCard from '@/components/QuestCard';
 import EmptyState from '@/components/EmptyState';
 import DraggableQuestCard from '@/components/DraggableQuestCard';
@@ -14,6 +15,8 @@ import BottomNavbar from '@/components/BottomNavbar';
 import QuickActions from '@/components/QuickActions';
 import AdvancedFilters from '@/components/AdvancedFilters';
 import QuestAnalytics from '@/components/QuestAnalytics';
+import TimerDisplay from '@/components/TimerDisplay';
+import FocusModeOverlay from '@/components/FocusModeOverlay';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const CARD_HEIGHT = 120; // Reduced height for better spacing
@@ -30,6 +33,7 @@ export default function HomeScreen() {
     isSandboxMode 
   } = useQuestStore();
   const { colors } = useThemeStore();
+  const { currentSession, focusMode } = useTimerStore();
   
   const [activeTab, setActiveTab] = useState<QuestType>('main');
   const [showCompleted, setShowCompleted] = useState(false);
@@ -200,6 +204,16 @@ export default function HomeScreen() {
       
 
 
+      {/* Focus Mode Overlay */}
+      <FocusModeOverlay />
+      
+      {/* Timer Display */}
+      {currentSession && (
+        <View style={styles.timerContainer}>
+          <TimerDisplay compact />
+        </View>
+      )}
+      
       {/* Quick Stats */}
       <QuickActions />
 
@@ -295,7 +309,6 @@ export default function HomeScreen() {
       {/* Bottom Navbar */}
       <BottomNavbar 
         onCreateQuest={() => router.push('/create')}
-        onFocusMode={() => setShowFilters(true)}
       />
 
       {/* Filters Modal */}
@@ -342,6 +355,10 @@ const styles = StyleSheet.create({
   sandboxText: {
     fontSize: 14,
     fontWeight: '500',
+  },
+  timerContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 8,
   },
   header: {
     paddingHorizontal: 16,

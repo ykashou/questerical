@@ -1,9 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Platform, Alert } from 'react-native';
 import { Plus, Clock, Target } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import useThemeStore from '@/store/themeStore';
 import useQuestStore from '@/store/questStore';
+import useTimerStore from '@/store/timerStore';
 
 interface BottomNavbarProps {
   onCreateQuest?: () => void;
@@ -19,11 +20,22 @@ export default function BottomNavbar({
   const router = useRouter();
   const { colors } = useThemeStore();
   const { quests } = useQuestStore();
+  const { 
+    currentSession, 
+    timerState, 
+    startTimer, 
+    stopTimer, 
+    focusMode, 
+    enableFocusMode, 
+    disableFocusMode 
+  } = useTimerStore();
+  const [showTimerOptions, setShowTimerOptions] = useState(false);
 
   const activeQuests = quests.filter(q => !q.completed);
   const hasActiveTimeTracking = quests.some(q => 
     q.timeEntries.some(entry => !entry.endTime)
   );
+  const isTimerActive = timerState === 'running' || timerState === 'paused';
 
   const handleCreateQuest = () => {
     if (onCreateQuest) {
@@ -36,21 +48,73 @@ export default function BottomNavbar({
   const handleStartTimer = () => {
     if (onStartTimer) {
       onStartTimer();
+      return;
+    }
+    
+    if (isTimerActive) {
+      // Stop current timer
+      Alert.alert(
+        'Stop Timer',
+        'Are you sure you want to stop the current timer session?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Stop', 
+            style: 'destructive',
+            onPress: () => stopTimer(false)
+          },
+        ]
+      );
     } else {
-      // Navigate to first active quest or show timer selection
-      const firstActiveQuest = activeQuests[0];
-      if (firstActiveQuest) {
-        router.push(`/quest/${firstActiveQuest.id}`);
-      }
+      // Show timer options
+      Alert.alert(
+        'Start Timer',
+        'Choose a timer mode:',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Pomodoro (25 min)', 
+            onPress: () => startTimer('pomodoro')
+          },
+          { 
+            text: 'Focus Session (60 min)', 
+            onPress: () => startTimer('focus', 60)
+          },
+          { 
+            text: 'Quick Timer (15 min)', 
+            onPress: () => startTimer('custom', 15)
+          },
+        ]
+      );
     }
   };
 
   const handleFocusMode = () => {
     if (onFocusMode) {
       onFocusMode();
+      return;
+    }
+    
+    if (focusMode.isActive) {
+      // Disable focus mode
+      Alert.alert(
+        'Exit Focus Mode',
+        'Are you sure you want to exit focus mode?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Exit Focus', 
+            onPress: disableFocusMode
+          },
+        ]
+      );
     } else {
-      // Implement focus mode logic
-      console.log('Focus mode activated');
+      // Enable focus mode with active quests
+      const activeQuestIds = activeQuests.slice(0, 3).map(q => q.id); // Limit to 3 quests
+      enableFocusMode(activeQuestIds, {
+        hideDistractions: true,
+        customMessage: 'Stay focused on your active quests!'
+      });
     }
   };
 
@@ -73,7 +137,7 @@ export default function BottomNavbar({
         onPress={handleStartTimer}
         activeOpacity={0.6}
       >
-        <Clock size={24} color={hasActiveTimeTracking ? colors.success : colors.text} />
+        <Clock size={24} color={isTimerActive ? colors.success : hasActiveTimeTracking ? colors.warning : colors.text} />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -81,7 +145,7 @@ export default function BottomNavbar({
         onPress={handleFocusMode}
         activeOpacity={0.6}
       >
-        <Target size={24} color={colors.warning} />
+        <Target size={24} color={focusMode.isActive ? colors.success : colors.text} />
       </TouchableOpacity>
     </View>
   );

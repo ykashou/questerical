@@ -6,6 +6,7 @@ import { Edit, Trash2, Share2, CheckCircle, Circle, Lock, Users, Globe } from 'l
 import useQuestStore from '@/store/questStore';
 import useThemeStore from '@/store/themeStore';
 import ObjectivesList from '@/components/ObjectivesList';
+import TimerDisplay from '@/components/TimerDisplay';
 
 export default function QuestDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -137,6 +138,12 @@ export default function QuestDetailScreen() {
             onChange={() => {}} 
             editable={false} 
           />
+        </View>
+        
+        {/* Timer Section */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Timer</Text>
+          <TimerDisplay questId={quest.id} />
         </View>
         
         <View style={styles.actions}>
