@@ -76,7 +76,7 @@ export default function QuickActions() {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 24,
+    marginBottom: 0,
   },
   statsContainer: {
     paddingHorizontal: 20,
