@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Questerical",
-    "slug": "questerical",
+    "name": "Mysterical",
+    "slug": "mysterical",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,14 +15,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "app.rork.questerical"
+      "bundleIdentifier": "app.rork.mysterical"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "app.rork.questerical"
+      "package": "app.rork.mysterical"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
