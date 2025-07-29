@@ -160,7 +160,7 @@ export default function LeftSidebar({ isOpen, onClose }: LeftSidebarProps) {
   });
 
   const handleNavigation = (path: string) => {
-    router.push(path);
+    router.push(path as any);
     onClose();
   };
 
