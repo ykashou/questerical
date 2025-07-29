@@ -96,9 +96,9 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
             activeOpacity={0.7}
           >
             {timerState === 'running' ? (
-              <Pause size={12} color={colors.primary} />
+              <Pause size={10} color={colors.primary} />
             ) : (
-              <Play size={12} color={colors.primary} />
+              <Play size={10} color={colors.primary} />
             )}
           </TouchableOpacity>
           
@@ -131,7 +131,7 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
               onPress={handleStop}
               activeOpacity={0.7}
             >
-              <Square size={10} color={colors.textSecondary} />
+              <Square size={8} color={colors.textSecondary} />
             </TouchableOpacity>
           )}
         </View>
@@ -189,9 +189,9 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
           activeOpacity={0.7}
         >
           {timerState === 'running' ? (
-            <Pause size={20} color={colors.background} />
+            <Pause size={16} color={colors.background} />
           ) : (
-            <Play size={20} color={colors.background} />
+            <Play size={16} color={colors.background} />
           )}
         </TouchableOpacity>
         
@@ -202,7 +202,7 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
               onPress={handleStop}
               activeOpacity={0.7}
             >
-              <Square size={20} color={colors.background} />
+              <Square size={16} color={colors.background} />
             </TouchableOpacity>
             
             <TouchableOpacity
@@ -210,7 +210,7 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
               onPress={handleReset}
               activeOpacity={0.7}
             >
-              <RotateCcw size={20} color={colors.background} />
+              <RotateCcw size={16} color={colors.background} />
             </TouchableOpacity>
           </>
         )}
@@ -221,40 +221,40 @@ export default function TimerDisplay({ questId, compact = false, horizontal = fa
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1,
-    padding: 24,
+    padding: 16,
     alignItems: 'center',
-    gap: 20,
+    gap: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.03,
+    shadowRadius: 4,
+    elevation: 1,
   },
   compactContainer: {
-    padding: 12,
-    gap: 8,
+    padding: 8,
+    gap: 6,
   },
   header: {
     alignItems: 'center',
-    gap: 4,
+    gap: 2,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
   },
   duration: {
-    fontSize: 14,
+    fontSize: 12,
   },
   timerSection: {
     alignItems: 'center',
   },
   progressRing: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 4,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderWidth: 3,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
@@ -268,48 +268,48 @@ const styles = StyleSheet.create({
     transformOrigin: 'right center',
   },
   timerDisplay: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 2,
+    gap: 1,
   },
   timeText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
     fontFamily: 'monospace',
   },
   statusText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '500',
   },
   controls: {
     flexDirection: 'row',
-    gap: 12,
+    gap: 8,
     alignItems: 'center',
   },
   controlButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
   },
   // Horizontal timer bar styles
   horizontalContainer: {
-    borderRadius: 12,
-    padding: 12,
-    marginTop: 8,
+    borderRadius: 8,
+    padding: 8,
+    marginTop: 6,
   },
   horizontalContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 6,
   },
   horizontalPlayButton: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -317,30 +317,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   horizontalTimeText: {
-    fontSize: 13,
+    fontSize: 11,
     fontWeight: '600',
     fontFamily: 'monospace',
   },
   horizontalModeText: {
-    fontSize: 10,
+    fontSize: 9,
     textTransform: 'capitalize',
   },
   horizontalProgressContainer: {
     flex: 2,
-    marginHorizontal: 8,
+    marginHorizontal: 6,
   },
   horizontalProgressBar: {
-    height: 3,
-    borderRadius: 1.5,
+    height: 2,
+    borderRadius: 1,
     overflow: 'hidden',
   },
   horizontalProgressFill: {
     height: '100%',
-    borderRadius: 1.5,
+    borderRadius: 1,
   },
   horizontalStopButton: {
-    width: 20,
-    height: 20,
+    width: 16,
+    height: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },

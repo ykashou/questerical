@@ -129,7 +129,7 @@ export default function QuestAnalytics() {
       {/* Stats Grid */}
       <View style={styles.statsGrid}>
         <StatCard
-          icon={<Trophy size={20} color={colors.warning} />}
+          icon={<Trophy size={16} color={colors.warning} />}
           title="Level"
           value={userStats.level}
           subtitle={`${userStats.totalXP} XP`}
@@ -137,7 +137,7 @@ export default function QuestAnalytics() {
         />
         
         <StatCard
-          icon={<Target size={20} color={colors.success} />}
+          icon={<Target size={16} color={colors.success} />}
           title="Completed"
           value={completedQuests.length}
           subtitle={`${completionRate.toFixed(1)}% rate`}
@@ -145,7 +145,7 @@ export default function QuestAnalytics() {
         />
         
         <StatCard
-          icon={<Clock size={20} color={colors.primary} />}
+          icon={<Clock size={16} color={colors.primary} />}
           title="Time Spent"
           value={`${Math.round(userStats.totalTimeSpent / 60)}h`}
           subtitle={`${userStats.totalTimeSpent % 60}m`}
@@ -153,7 +153,7 @@ export default function QuestAnalytics() {
         />
         
         <StatCard
-          icon={<Zap size={20} color={colors.accent} />}
+          icon={<Zap size={16} color={colors.accent} />}
           title="Current Streak"
           value={userStats.currentStreak}
           subtitle={`Best: ${userStats.longestStreak}`}
@@ -166,8 +166,8 @@ export default function QuestAnalytics() {
         <Text style={[styles.chartTitle, { color: colors.text }]}>Weekly Completions</Text>
         <LineChart
           data={weeklyData}
-          width={screenWidth - 64}
-          height={200}
+          width={screenWidth - 48}
+          height={160}
           chartConfig={chartConfig}
           bezier
           style={styles.chart}
@@ -179,8 +179,8 @@ export default function QuestAnalytics() {
         <Text style={[styles.chartTitle, { color: colors.text }]}>Quest Types</Text>
         <PieChart
           data={questTypeData}
-          width={screenWidth - 64}
-          height={200}
+          width={screenWidth - 48}
+          height={160}
           chartConfig={chartConfig}
           accessor="population"
           backgroundColor="transparent"
@@ -194,8 +194,8 @@ export default function QuestAnalytics() {
         <Text style={[styles.chartTitle, { color: colors.text }]}>Priority Distribution</Text>
         <BarChart
           data={priorityData}
-          width={screenWidth - 64}
-          height={200}
+          width={screenWidth - 48}
+          height={160}
           chartConfig={chartConfig}
           style={styles.chart}
           yAxisLabel=""
@@ -235,97 +235,97 @@ export default function QuestAnalytics() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 12,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '700',
-    marginBottom: 20,
+    marginBottom: 12,
   },
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
-    marginBottom: 20,
+    gap: 8,
+    marginBottom: 16,
   },
   statCard: {
     flex: 1,
     minWidth: '45%',
-    padding: 16,
-    borderRadius: 12,
+    padding: 12,
+    borderRadius: 10,
   },
   statHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   statIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 8,
+    marginRight: 6,
   },
   statTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
   statValue: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '700',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   statSubtitle: {
-    fontSize: 12,
+    fontSize: 10,
   },
   chartContainer: {
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 20,
-  },
-  chartTitle: {
-    fontSize: 18,
-    fontWeight: '600',
+    padding: 12,
+    borderRadius: 10,
     marginBottom: 16,
   },
+  chartTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 12,
+  },
   chart: {
-    borderRadius: 8,
+    borderRadius: 6,
   },
   achievementsContainer: {
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 20,
+    padding: 12,
+    borderRadius: 10,
+    marginBottom: 16,
   },
   achievementItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.1)',
   },
   achievementIcon: {
-    fontSize: 24,
-    marginRight: 12,
+    fontSize: 20,
+    marginRight: 8,
   },
   achievementContent: {
     flex: 1,
   },
   achievementName: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
-    marginBottom: 2,
+    marginBottom: 1,
   },
   achievementDescription: {
-    fontSize: 14,
+    fontSize: 12,
   },
   xpBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
   },
   xpBadgeText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600',
   },
 });

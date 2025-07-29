@@ -46,25 +46,25 @@ export default function QuickActions() {
         contentContainerStyle={styles.statsContainer}
       >
         <QuickStat
-          icon={<Target size={16} color={colors.success} />}
+          icon={<Target size={14} color={colors.success} />}
           value={quests.filter(q => q.completed).length}
           label="Completed"
           color={colors.success}
         />
         <QuickStat
-          icon={<Clock size={16} color={colors.primary} />}
+          icon={<Clock size={14} color={colors.primary} />}
           value={activeQuests.length}
           label="Active"
           color={colors.primary}
         />
         <QuickStat
-          icon={<Zap size={16} color={colors.warning} />}
+          icon={<Zap size={14} color={colors.warning} />}
           value={userStats.level}
           label="Level"
           color={colors.warning}
         />
         <QuickStat
-          icon={<Calendar size={16} color={colors.accent} />}
+          icon={<Calendar size={14} color={colors.accent} />}
           value={userStats.currentStreak}
           label="Streak"
           color={colors.accent}
@@ -79,31 +79,31 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   statsContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
-    gap: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+    gap: 12,
   },
   statItem: {
     alignItems: 'center',
-    padding: 16,
-    borderRadius: 16,
-    minWidth: 90,
+    padding: 12,
+    borderRadius: 12,
+    minWidth: 80,
   },
   statIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 12,
+    marginBottom: 8,
   },
   statValue: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   statLabel: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '500',
     textAlign: 'center',
   },

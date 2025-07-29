@@ -221,7 +221,7 @@ export default function QuestsScreen() {
             <Text style={[styles.welcomeText, { color: colors.textSecondary }]}>Your Quests</Text>
             <View style={styles.titleRow}>
               <Text style={[styles.appTitle, { color: colors.text }]}>Quest Management</Text>
-              <Sparkles size={20} color={colors.primary} />
+              <Sparkles size={18} color={colors.primary} />
             </View>
           </View>
         </View>
@@ -346,71 +346,73 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    gap: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    gap: 6,
   },
   sandboxText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
   timerContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 8,
+    paddingHorizontal: 12,
+    paddingBottom: 4,
   },
   header: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 12,
   },
   headerTop: {
-    marginBottom: 20,
+    marginBottom: 12,
   },
   welcomeSection: {
-    gap: 4,
+    gap: 2,
   },
   welcomeText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 6,
   },
   appTitle: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '700',
     letterSpacing: -0.5,
   },
   tabsContainer: {
-    paddingRight: 16,
-    gap: 8,
-    marginBottom: 16,
+    paddingRight: 12,
+    gap: 6,
+    marginBottom: 12,
   },
   tab: {
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 25,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
     borderWidth: 1,
   },
   tabText: {
     fontWeight: '500',
+    fontSize: 13,
   },
   activeTabText: {
     fontWeight: '600',
+    fontSize: 13,
   },
   headerActions: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 8,
   },
   actionButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 6,
   },
   filterText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
   selectionHeader: {
@@ -445,9 +447,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listContent: {
-    paddingHorizontal: 20,
-    paddingTop: 8,
-    paddingBottom: 120, // Add space for bottom navbar
+    paddingHorizontal: 16,
+    paddingTop: 4,
+    paddingBottom: 100, // Add space for bottom navbar
   },
   emptyContainer: {
     flex: 1,

@@ -253,9 +253,9 @@ export default function QuestCard({ quest, isSelected, onSelect, showTimeTrackin
               hitSlop={10}
             >
               {quest.completed ? (
-                <CheckCircle size={24} color={colors.success} />
+                <CheckCircle size={20} color={colors.success} />
               ) : (
-                <Circle size={24} color={colors.textSecondary} />
+                <Circle size={20} color={colors.textSecondary} />
               )}
             </Pressable>
           </View>
@@ -378,10 +378,10 @@ export default function QuestCard({ quest, isSelected, onSelect, showTimeTrackin
 const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
-    marginBottom: 12,
+    marginBottom: 8,
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: 16,
+    borderRadius: 12,
   },
   actionsContainer: {
     position: 'absolute',
@@ -419,20 +419,20 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   container: {
-    borderRadius: 16,
-    padding: 16,
-    borderLeftWidth: 4,
+    borderRadius: 12,
+    padding: 12,
+    borderLeftWidth: 3,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.03,
+    shadowRadius: 4,
+    elevation: 1,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   titleContainer: {
     flexDirection: 'row',
@@ -440,56 +440,56 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   typeIndicator: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 8,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginRight: 6,
   },
   title: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
     flex: 1,
   },
   recurringBadge: {
-    marginLeft: 8,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    marginLeft: 6,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
     backgroundColor: 'rgba(136, 192, 208, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   recurringText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600',
   },
   checkButton: {
-    marginLeft: 12,
+    marginLeft: 8,
   },
   progressContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   progressBar: {
     flex: 1,
-    height: 4,
-    borderRadius: 2,
-    marginRight: 8,
+    height: 3,
+    borderRadius: 1.5,
+    marginRight: 6,
   },
   progressFill: {
     height: '100%',
-    borderRadius: 2,
+    borderRadius: 1.5,
   },
   progressText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '500',
-    minWidth: 35,
+    minWidth: 30,
   },
   description: {
-    fontSize: 13,
-    marginBottom: 10,
-    lineHeight: 18,
+    fontSize: 12,
+    marginBottom: 8,
+    lineHeight: 16,
   },
   completedText: {
     textDecorationLine: 'line-through',
@@ -498,22 +498,22 @@ const styles = StyleSheet.create({
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 8,
+    marginBottom: 6,
     alignItems: 'center',
   },
   tag: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginRight: 6,
-    marginBottom: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+    marginRight: 4,
+    marginBottom: 2,
   },
   tagText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '500',
   },
   moreTagsText: {
-    fontSize: 12,
+    fontSize: 10,
     fontStyle: 'italic',
   },
   footer: {
@@ -533,44 +533,44 @@ const styles = StyleSheet.create({
   metaItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 12,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 4,
+    marginRight: 8,
+    paddingHorizontal: 3,
+    paddingVertical: 1,
+    borderRadius: 3,
   },
   metaText: {
-    fontSize: 12,
-    marginLeft: 4,
+    fontSize: 10,
+    marginLeft: 3,
     textTransform: 'capitalize',
   },
   difficultyDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
   },
   timeButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 6,
-    paddingVertical: 4,
-    borderRadius: 6,
-    marginRight: 8,
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    borderRadius: 4,
+    marginRight: 6,
   },
   timeText: {
-    fontSize: 11,
-    marginLeft: 4,
+    fontSize: 9,
+    marginLeft: 3,
     fontWeight: '500',
   },
   xpContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 6,
-    paddingVertical: 4,
-    borderRadius: 6,
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    borderRadius: 4,
     backgroundColor: 'rgba(235, 203, 139, 0.1)',
   },
   xpText: {
-    fontSize: 11,
+    fontSize: 9,
     marginLeft: 2,
     fontWeight: '600',
   },

@@ -122,14 +122,14 @@ export default function BottomNavbar({
     <View style={[styles.container, { 
       backgroundColor: colors.card,
       borderTopColor: colors.border,
-      paddingBottom: Platform.OS === 'ios' ? 34 : 16, // Account for home indicator on iOS
+      paddingBottom: Platform.OS === 'ios' ? 28 : 12, // Account for home indicator on iOS
     }]}>
       <TouchableOpacity
         style={[styles.iconButton, { backgroundColor: colors.primary + '15' }]}
         onPress={handleCreateQuest}
         activeOpacity={0.7}
       >
-        <Plus size={24} color={colors.primary} />
+        <Plus size={20} color={colors.primary} />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -137,7 +137,7 @@ export default function BottomNavbar({
         onPress={handleStartTimer}
         activeOpacity={0.7}
       >
-        <Clock size={24} color={isTimerActive ? colors.success : hasActiveTimeTracking ? colors.warning : colors.text} />
+        <Clock size={20} color={isTimerActive ? colors.success : hasActiveTimeTracking ? colors.warning : colors.text} />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -145,7 +145,7 @@ export default function BottomNavbar({
         onPress={handleFocusMode}
         activeOpacity={0.7}
       >
-        <Target size={24} color={focusMode.isActive ? colors.success : colors.text} />
+        <Target size={20} color={focusMode.isActive ? colors.success : colors.text} />
       </TouchableOpacity>
     </View>
   );
@@ -154,21 +154,21 @@ export default function BottomNavbar({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 32,
-    paddingTop: 20,
+    paddingHorizontal: 24,
+    paddingTop: 12,
     borderTopWidth: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 8,
+    shadowOffset: { width: 0, height: -1 },
+    shadowOpacity: 0.03,
+    shadowRadius: 4,
+    elevation: 4,
   },
   iconButton: {
-    padding: 16,
+    padding: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
+    borderRadius: 16,
   },
 });

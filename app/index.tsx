@@ -54,7 +54,7 @@ export default function HomeScreen() {
             <Text style={[styles.welcomeText, { color: colors.textSecondary }]}>Welcome back</Text>
             <View style={styles.titleRow}>
               <Text style={[styles.appTitle, { color: colors.text }]}>Analytics Dashboard</Text>
-              <BarChart3 size={20} color={colors.primary} />
+              <BarChart3 size={18} color={colors.primary} />
             </View>
           </View>
         </View>
@@ -86,39 +86,39 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    gap: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    gap: 6,
   },
   sandboxText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
   timerContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 8,
+    paddingHorizontal: 12,
+    paddingBottom: 4,
   },
   header: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 12,
   },
   headerTop: {
-    marginBottom: 20,
+    marginBottom: 12,
   },
   welcomeSection: {
-    gap: 4,
+    gap: 2,
   },
   welcomeText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 6,
   },
   appTitle: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '700',
     letterSpacing: -0.5,
   },
